@@ -1,0 +1,45 @@
+{
+  "name": "ratings",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon --watch src --exec \"npm run build && npm start\"",
+    "test": "mocha",
+    "verify": "npm run eslint && npm run test",
+    "build": "rimraf lib && babel src --out-dir lib",
+    "build:start": "npm run build && npm start",
+    "eslint": "eslint \"src/**/*.js\" \"test/**/*.spec.js\"",
+    "fixlint": "eslint \"src/**/*.js\", \"test/**/*.spec.js\" --fix",
+    "coverage": "nyc npm test && nyc report"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "config": "3.2.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~4.1.1",
+    "express": "~4.17.1",
+    "express-handlebars": "^3.1.0",
+    "express-vue": "^5.12.0",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.2.3",
+    "@babel/core": "7.2.2",
+    "@babel/node": "7.2.2",
+    "@babel/plugin-proposal-class-properties": "7.3.3",
+    "@babel/plugin-transform-runtime": "7.3.4",
+    "@babel/preset-env": "7.3.1",
+    "@babel/register": "7.0.0",
+    "@babel/runtime": "7.3.4",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "eslint": "5.16.0",
+    "mocha": "^6.1.4",
+    "nodemon": "^1.19.0",
+    "nyc": "^14.1.1",
+    "rimraf": "2.6.3",
+    "sinon": "^7.3.2",
+    "sinon-chai": "^3.3.0"
+  }
+}
