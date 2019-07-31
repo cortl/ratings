@@ -1,18 +1,11 @@
 import express from 'express';
 import { getTvDetails, getSeasonDetails, getEpisodeDetails } from '../services/moviedb';
 
-const getEpisodesByRating = async (req, res) => {
+const getEpisodesByRating = (req, res) => {
     const tvId = req.params.id;
-    const tv = await getShowById(tvId);
-    const seasons = tv.seasons.map(season => ({
-        id: `season${season.number}`,
-        title: `Season ${season.number}`,
-        number: season.number,
-        labels: season.episodes.map(ep => `"${ep.name}"`),
-        data: season.episodes.map(ep => ep.rating)
-    }));
-
-    res.render('tv', { title: tv.title, seasons });
+    getShowById(tvId)
+    .then(tv => res.status(200).json({ title: tv.title, seasons: tv.seasons }))
+    .catch(err => res.status(500).send(err.message));
 };
 
 const getShowById = async (tvId) => {
@@ -45,14 +38,10 @@ const getShowById = async (tvId) => {
     };
 };
 
-const getPickTvShow = (req, res) => {
-    res.render('pick');
-};
 
 const router = () => {
     const router = express.Router();
     router.get('/:id', getEpisodesByRating);
-    router.get('/', getPickTvShow);
     return router;
 };
 
