@@ -65,13 +65,15 @@ export default {
   },
   methods: {
     search: async function(input) {
-      this.results = await Axios.post(`http://localhost:8080/search/${input}`)
-        .then(res => res.data)
-        .catch(() => []);
+      if (input && input.length > 2) {
+        this.results = await Axios.post(`http://localhost:8080/search/${input}`)
+          .then(res => res.data)
+          .catch(() => []);
+      }
       return this.results;
     },
     handleSubmit: function(result) {
-      this.$emit('result', result.id);
+      this.$emit("result", result.id);
     }
   }
 };
