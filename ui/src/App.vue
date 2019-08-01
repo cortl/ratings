@@ -1,18 +1,35 @@
 <template>
   <div class="container">
     <div id="app">
-      <Search/>
+      <div v-if="currentPage === 'search'">
+        <Search @result="goToResult" />
+      </div>
+      <div v-if="currentPage === 'result'">
+        <Result :id="tvId"/>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Search from "./components/Search.vue";
+import Result from "./components/Result.vue";
 
 export default {
   name: "app",
   components: {
-    Search
+    Search,
+    Result
+  },
+  data: () => ({
+    currentPage: "search",
+    tvId: ""
+  }),
+  methods: {
+    goToResult: function(id) {
+      this.currentPage = "result";
+      this.tvId = id;
+    }
   }
 };
 </script>
