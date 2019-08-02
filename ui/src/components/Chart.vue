@@ -5,6 +5,8 @@
 <script>
 import { Chart } from "frappe-charts/dist/frappe-charts.min.esm";
 
+const pickone = items => items[Math.floor(Math.random()*items.length)];
+
 export default {
   name: "Chart",
   props: {
@@ -13,10 +15,11 @@ export default {
   mounted: function() {
     const values = this.season.episodes.map(episode => episode.rating);
     const labels = this.season.episodes.map(episode => episode.number);
+    const color = pickone(['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'])
     this.chart = new Chart(this.$refs.chart, {
       title: `Season ${this.season.number}`,
       type: "line",
-      colors: ["purple"],
+      colors: [color],
       tooltipOptions: {
         formatTooltipX: d =>
           this.season.episodes.find(episode => episode.number === d).title,
