@@ -1,11 +1,11 @@
 <template>
   <div class="container">
     <div id="app">
-      <div v-if="currentPage === 'search'">
-        <Search @result="goToResult" />
+      <div v-if="tvId">
+        <Result :id="tvId" />
       </div>
-      <div v-if="currentPage === 'result'">
-        <Result :id="tvId"/>
+      <div v-else>
+        <Search @result="goToResult" />
       </div>
     </div>
   </div>
@@ -22,12 +22,10 @@ export default {
     Result
   },
   data: () => ({
-    currentPage: "search",
     tvId: ""
   }),
   methods: {
     goToResult: function(id) {
-      this.currentPage = "result";
       this.tvId = id;
     }
   }
