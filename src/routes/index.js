@@ -11,7 +11,9 @@ const routes = () => {
       .then(res => res.data.results.map(result => ({
         title: result.name,
         id: result.id, description: result.overview,
-        poster: `https://image.tmdb.org/t/p/w92/${result.poster_path}`
+        poster: result.poster_path
+          ? `https://image.tmdb.org/t/p/w92/${result.poster_path}`
+          : null
       })))
       .catch(err => {
         console.error(err.message);

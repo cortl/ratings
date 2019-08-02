@@ -1,5 +1,6 @@
 <template>
   <div>
+    <button v-on:click="$emit('back')">Go Back</button>
     <h2 v-show="error">Error {{error}}</h2>
     <div v-if="loading" v-show="loading">
       <h2>Loading</h2>
@@ -44,3 +45,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+button {
+  float: right;
+}
+</style>
+

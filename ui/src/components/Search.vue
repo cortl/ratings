@@ -34,7 +34,7 @@
                   :key="resultProps[index].id"
                   v-bind="resultProps[index]"
                 >
-                  <img class="result-poster" :src="result.poster" />
+                  <img v-show="result.poster" class="result-poster" :src="result.poster" />
                   <div class="title">{{ result.title }}</div>
                   <div class="snippet">{{result.description}}</div>
                 </li>
@@ -85,8 +85,8 @@ export default {
   border-top: 1px solid #eee;
   padding: 16px;
   background: transparent;
-  display: block;
   cursor: pointer;
+  display: block;
 }
 
 .title {
@@ -97,6 +97,7 @@ export default {
 .result-poster {
   float: left;
   margin-right: 1em;
+  display: block;
 }
 
 .snippet {

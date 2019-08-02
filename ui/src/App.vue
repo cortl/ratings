@@ -2,7 +2,7 @@
   <div class="container">
     <div id="app">
       <div v-if="tvId">
-        <Result :id="tvId" />
+        <Result :id="tvId" @back="handleBack"/>
       </div>
       <div v-else>
         <Search @result="goToResult" />
@@ -27,6 +27,9 @@ export default {
   methods: {
     goToResult: function(id) {
       this.tvId = id;
+    },
+    handleBack: function() {
+      this.tvId = ""
     }
   }
 };
