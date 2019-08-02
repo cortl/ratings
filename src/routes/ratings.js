@@ -33,7 +33,7 @@ const getShowById = async (tvId) => {
         ratedSeasons.push({
             number: season.season_number,
             episodes: episodes.map(episodeDetail => ({
-                name: season.episodes.find(ep => ep.episode_number === episodeDetail.episode_number).name,
+                title: season.episodes.find(ep => ep.episode_number === episodeDetail.episode_number).name,
                 number: episodeDetail.episode_number,
                 rating: episodeDetail.vote_average
             }))
