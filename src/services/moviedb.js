@@ -1,5 +1,5 @@
 import config from 'config';
-import Axios from 'axios';
+import Axios from '../concurrent';
 
 export const getTvDetails = tvId =>
     Axios.get(`https://api.themoviedb.org/3/tv/${tvId}?api_key=${config.get('API_KEY')}&language=en-US`)
