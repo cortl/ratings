@@ -84,6 +84,7 @@ export default {
   border-top: 1px solid #eee;
   padding: 16px;
   background: transparent;
+  cursor: pointer;
 }
 
 .title {
