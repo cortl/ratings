@@ -66,7 +66,7 @@ export default {
   methods: {
     search: async function(input) {
       if (input && input.length > 2) {
-        this.results = await Axios.post(`http://localhost:8080/search/${input}`)
+        this.results = await Axios.post(`/search/${input}`)
           .then(res => res.data)
           .catch(() => []);
       }
