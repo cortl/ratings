@@ -8,7 +8,11 @@ const routes = () => {
   routes.get('/', (_req, res) => res.render('index.html'));
   routes.post('/search/:search', async (req, res) => {
     const search = await Axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${config.get('API_KEY')}&language=en-US&query=${req.params.search}`)
-      .then(res => res.data.results.map(result => ({title: result.name, id: result.id, description: result.overview})))
+      .then(res => res.data.results.map(result => ({
+        title: result.name,
+        id: result.id, description: result.overview,
+        poster: `https://image.tmdb.org/t/p/w92/${result.poster_path}`
+      })))
       .catch(err => {
         console.error(err.message);
         res.status(500).send(err.message);
