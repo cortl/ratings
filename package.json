@@ -7,9 +7,10 @@
     "dev": "nodemon --watch src --watch ui/src --exec \"npm run build:start\"",
     "test": "mocha",
     "verify": "npm run eslint && npm run test",
-    "build": "rimraf lib && babel src --out-dir lib",
+    "build": "npm run build:server && npm run build:ui",
+    "build:server": "rimraf lib && babel src --out-dir lib",
     "build:ui": "rimraf dist && npm --prefix ui run build && cp -pr ./ui/dist/ ./dist",
-    "build:start": "npm run build && npm run build:ui && npm start",
+    "build:start": "npm run build:server && npm run build:ui && npm start",
     "eslint": "eslint \"src/**/*.js\" \"test/**/*.spec.js\"",
     "fixlint": "eslint \"src/**/*.js\", \"test/**/*.spec.js\" --fix",
     "coverage": "nyc npm test && nyc report"
