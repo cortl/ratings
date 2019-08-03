@@ -6,6 +6,7 @@ import config from 'config';
 const routes = () => {
   const routes = Router({});
   routes.get('/', (_req, res) => res.render('index.html'));
+  routes.get('/health', (_req, res) => res.status(200).send('OK'));
   routes.post('/search/:search', async (req, res) => {
     const search = await Axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${config.get('API_KEY')}&language=en-US&query=${req.params.search}`)
       .then(res => res.data.results.map(result => ({

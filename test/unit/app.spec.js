@@ -4,7 +4,7 @@ import app from '../../src/app';
 describe('App', () => {
     it('should work', () => {
         chai.request(app)
-        .get('/')
+        .get('/health')
         .end((_err, res) => {
             expect(res).to.have.status(200);
         });
