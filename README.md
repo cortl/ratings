@@ -5,7 +5,9 @@
 [![License](https://img.shields.io/github/license/cortl/ratings.svg)](LICENSE)
 
 ## About
-Web app for viewing ratings by episode from [The Movie DB](https://www.themoviedb.org/)
+Web app for viewing ratings by episode from [The Movie DB](https://www.themoviedb.org/) with a backend built in Node/Express and the UI built in Vue.js.  Based on the project [Express GCP](https://github.com/cortl/express-gcp)
+
+![Demo](./img/demo.gif)
 
 ## Getting Started
 
