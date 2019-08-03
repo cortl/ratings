@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon --watch src ui --exec \"npm run build:start\"",
+    "dev": "nodemon --watch src --watch ui/src --exec \"npm run build:start\"",
     "test": "mocha",
     "verify": "npm run eslint && npm run test",
     "build": "rimraf lib && babel src --out-dir lib",
