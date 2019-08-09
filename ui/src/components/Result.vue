@@ -33,7 +33,7 @@ export default {
     error: false
   }),
   mounted() {
-    Axios.get(`/ratings/${this.id}`)
+    Axios.get(`/imdb/${this.id}`)
       .then(response => {
         this.info = response.data;
         this.loading = false;

@@ -2,6 +2,7 @@ import { Router } from 'express';
 import tvRouter from './ratings';
 import Axios from 'axios';
 import config from 'config';
+import { getShow } from '../services/imdb';
 
 const routes = () => {
   const routes = Router({});
@@ -23,6 +24,7 @@ const routes = () => {
     res.json(search);
   });
   routes.use('/ratings', tvRouter());
+  routes.use('/imdb/:id', async (req, res) => res.json(await getShow(req.params.id)));
   return routes;
 };
 

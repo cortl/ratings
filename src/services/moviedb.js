@@ -26,6 +26,7 @@ export const getEpisodeDetails = (tvId, seasonNumber, episodeNumber) =>
         });
 
 export const getExternalIds = (tvId) =>
+             //https://api.themoviedb.org/3/tv/2316/external_ids?api_key=e63f7680d1c92d84cb0dfbbbc81b8c54&language=en-US
     Axios.get(`https://api.themoviedb.org/3/tv/${tvId}/external_ids?api_key=${config.get('API_KEY')}&language=en-US`)
         .then(res => res.data)
         .catch(err => {
