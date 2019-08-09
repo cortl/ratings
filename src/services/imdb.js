@@ -2,9 +2,7 @@ import axios from 'axios';
 import cheerio from 'cheerio';
 import { getExternalIds } from './moviedb';
 
-const getTvShowInfo = async (tmdbId) => {
-    const externalIds = await getExternalIds(tmdbId);
-    const tvId = externalIds.imdb_id;
+const getTvShowInfo = async (tvId) => {
     const tvShowPage = await axios.get(`https://www.imdb.com/title/${tvId}/`).then(res => res.data);
     const $ = cheerio.load(tvShowPage);
 
@@ -20,11 +18,14 @@ const getTvShowInfo = async (tmdbId) => {
     };
 };
 
-export const getShow = async (tvId) => {
+export const getShow = async (tmdbId) => {
+    const externalIds = await getExternalIds(tmdbId);
+    const tvId = externalIds.imdb_id;
+
     const tv = await getTvShowInfo(tvId);
 
     const seasons = await Promise.all(tv.seasons.map(async number => {
-        const seasonUrl = `https://www.imdb.com/title/tt0386676/episodes?season=${number}`;
+        const seasonUrl = `https://www.imdb.com/title/${tvId}/episodes?season=${number}`;
         const page = await axios.get(seasonUrl).then(res => res.data);
         const $ = cheerio.load(page);
         const episodes = [];
