@@ -5,7 +5,7 @@
 <script>
 import { Chart } from "frappe-charts/dist/frappe-charts.min.esm";
 
-const pickone = items => items[Math.floor(Math.random()*items.length)];
+const pickone = items => items[Math.floor(Math.random() * items.length)];
 
 export default {
   name: "Chart",
@@ -15,7 +15,17 @@ export default {
   mounted: function() {
     const values = this.season.episodes.map(episode => episode.rating);
     const labels = this.season.episodes.map(episode => episode.number);
-    const color = pickone(['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'])
+    const color = pickone([
+      "red",
+      "orange",
+      "yellow",
+      "green",
+      "blue",
+      "crimson",
+      "cyan",
+      "pink",
+      "violet"
+    ]);
     this.chart = new Chart(this.$refs.chart, {
       title: `Season ${this.season.number}`,
       type: "line",
@@ -37,6 +47,11 @@ export default {
           {
             label: "",
             value: 0,
+            type: "solid"
+          },
+          {
+            label: "",
+            value: 10 ,
             type: "solid"
           }
         ]
