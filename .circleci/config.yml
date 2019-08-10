@@ -5,7 +5,6 @@ jobs:
       - image: circleci/node:8.11.2
     parallelism: 1
     working_directory: ~/repo
-
     steps:
       - checkout
       - restore_cache:
@@ -20,3 +19,24 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm run verify
       - run: npm run build
+      - persist_to_workspace:
+          root: /tmp/dir
+          paths:
+            - dist
+            - lib
+            - index.js
+            - package.json
+  deploy:
+    docker:
+      - image: google/cloud-sdk
+    filters:
+      branches:
+        only: master
+    requires:
+      - build-job
+    steps:
+      - run: |
+          echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+          gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+          gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+      - run: gcloud app deploy
