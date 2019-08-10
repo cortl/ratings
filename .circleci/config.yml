@@ -30,13 +30,17 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm run verify
       - run: npm run build
+      - run: echo "module.exports = { API_KEY\: `echo $API_KEY` };" > config/production.js
+      - run: cat config/production.js
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
             - dist
             - lib
+            - config
             - index.js
             - package.json
+            - package-lock.json
             - app.yaml
             - .gcloudignore
   deploy:
