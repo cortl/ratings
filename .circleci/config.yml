@@ -31,7 +31,7 @@ jobs:
       - run: npm run verify
       - run: npm run build
       - persist_to_workspace:
-          root: ~/repo
+          root: /tmp/workspace
           paths:
             - dist
             - lib
@@ -43,7 +43,7 @@ jobs:
     docker:
       - image: google/cloud-sdk
     attach_workspace:
-      at: ~/repo
+      at: /tmp/workspace
     steps:
       - run: |
           echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
