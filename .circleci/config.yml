@@ -32,6 +32,8 @@ jobs:
             - lib
             - index.js
             - package.json
+            - app.yaml
+            - .gcloudignore
   deploy:
     docker:
       - image: google/cloud-sdk
@@ -39,7 +41,7 @@ jobs:
       branches:
         only: master
     requires:
-      - build-job
+      - build
     attach_workspace:
       at: .
     steps:
