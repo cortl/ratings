@@ -20,7 +20,7 @@ jobs:
       - run: npm run verify
       - run: npm run build
       - persist_to_workspace:
-          root: /tmp/dir
+          root: .
           paths:
             - dist
             - lib
@@ -34,6 +34,8 @@ jobs:
         only: master
     requires:
       - build-job
+    attach_workspace:
+      at: .
     steps:
       - run: |
           echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
