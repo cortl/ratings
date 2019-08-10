@@ -31,7 +31,7 @@ jobs:
       - run: npm run verify
       - run: npm run build
       - persist_to_workspace:
-          root: .
+          root: ~/repo
           paths:
             - dist
             - lib
@@ -49,5 +49,5 @@ jobs:
           echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
           gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
           gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-      - run: ls -latr
+      - run: ls -latr ~/repo
       - run: gcloud app deploy
