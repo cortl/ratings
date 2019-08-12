@@ -8,6 +8,7 @@
     </div>
     <div v-else>
       <h2>{{this.info.title}}</h2>
+      <p>{{this.info.description}}</p>
       <div v-for="season in this.info.seasons" v-bind:key="season.number">
         <Chart :season="season" />
       </div>
