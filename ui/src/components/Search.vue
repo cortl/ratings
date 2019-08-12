@@ -2,7 +2,7 @@
   <div class="search">
     <h2>TV Show by Rating</h2>
     <div class="row">
-      <div class="one-half column">
+      <div class="one-half column offset-by-three">
         <label for="tv">TV Show</label>
         <Autocomplete :search="search" @submit="handleSubmit">
           <template
@@ -113,5 +113,9 @@ li {
   border-bottom: 1px #000;
   border-left: 1px #000;
   border-right: 1px #000;
+}
+
+h2 {
+  text-align: center;
 }
 </style>
