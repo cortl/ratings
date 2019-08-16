@@ -3,7 +3,7 @@ import cheerio from 'cheerio';
 import { getExternalIds } from './moviedb';
 
 const getTvShowInfo = async (tvId) => {
-    console.info(`retrieving details for ${tvId}`)
+    console.info(`retrieving details for ${tvId}`);
     const tvShowPage = await axios.get(`https://www.imdb.com/title/${tvId}/episodes`).then(res => res.data);
     const $ = cheerio.load(tvShowPage);
 
