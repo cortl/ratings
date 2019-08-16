@@ -3,14 +3,15 @@ import cheerio from 'cheerio';
 import { getExternalIds } from './moviedb';
 
 const getTvShowInfo = async (tvId) => {
-    const tvShowPage = await axios.get(`https://www.imdb.com/title/${tvId}/`).then(res => res.data);
+    console.info(`retrieving details for ${tvId}`)
+    const tvShowPage = await axios.get(`https://www.imdb.com/title/${tvId}/episodes`).then(res => res.data);
     const $ = cheerio.load(tvShowPage);
 
     const title = $('h1').text().trim();
     const description = $('.summary_text').text().trim();
 
     const seasonNumbers = [];
-    $('.seasons-and-year-nav div:nth-child(4) a').each((index, element) => seasonNumbers.push(element.children[0].data));
+    $('#bySeason').children().each((index, element) => seasonNumbers.push(element.children[0].data.trim()));
     return {
         title,
         description,
@@ -20,10 +21,12 @@ const getTvShowInfo = async (tvId) => {
 
 export const getShow = async (tmdbId) => {
     const externalIds = await getExternalIds(tmdbId);
+    console.time(externalIds.imdb_id);
+    console.info(`Retrieved external id ${externalIds.imdb_id} for ${tmdbId}`);
+
     const tvId = externalIds.imdb_id;
-
     const tv = await getTvShowInfo(tvId);
-
+    console.log(tv);
     const seasons = await Promise.all(tv.seasons.map(async number => {
         const seasonUrl = `https://www.imdb.com/title/${tvId}/episodes?season=${number}`;
         const page = await axios.get(seasonUrl).then(res => res.data);
@@ -37,12 +40,15 @@ export const getShow = async (tmdbId) => {
                 rating: $(element).find('.ipl-rating-star__rating').first().text()
             }));
 
+        console.info(`Retrieved season ${number} for ${tvId}`);
         return {
             number: parseInt(number),
             episodes
         };
 
     }));
+    console.info(`Finished gathering data for ${tvId}`);
+    console.timeEnd(tvId);
     return {
         ...tv,
         seasons
