@@ -25,11 +25,11 @@ const routes = () => {
   });
   routes.use('/ratings', tvRouter());
   routes.use('/imdb/:id', async (req, res) => getShow(req.params.id)
-    .then(show => res.json(show)
-      .catch(e => {
-        console.error(e);
-        res.status(500).send(e.message);
-      })));
+    .then(show => res.json(show))
+    .catch(e => {
+      console.error(e);
+      res.status(500).send(e.message);
+    }));
   return routes;
 };
 
